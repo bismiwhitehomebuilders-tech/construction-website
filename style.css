@@ -242,12 +242,12 @@ project-container{
 position:fixed;
 bottom: 20px;
 right: 20px;
-background: #250366;
+background: #25D366;
 color: white;
 font-size:24px;
 padding: 15px;
 border-radius: 50%;
 text-decoration: none;
 box-shadow:0 5px 15px rgba(0,0,0,0.3);
-z-index:1000;
+z-index:9999;
 }
