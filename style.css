@@ -14,19 +14,23 @@ scroll-margin-top:100px;
     position: fixed;
     top: 0;
     width: 100%;
-    z-index:1000;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(0,0,0,0.5);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 30px;
     box-sizing: border-box;
+
+    background:rgba(0,0,0,0,4);
+    backdrop-filter:blur(10px);
+
+    color:white;
+    z-index:1000;
 }
 
 logo {
     font-weight: bold;
     color: #d4af37;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 .nav-links {
@@ -40,6 +44,12 @@ logo {
 .nav-links a {
     text-decoration: none;
     color: white;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+color:#f4b400;
 }
 
 /* HERO */
@@ -196,4 +206,48 @@ margin-bottom:10px;
 .stat p{
 font-size:14px;
 color: #555;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+@media (max-width: 768px) {
+
+.nav-links{
+flex-direction: column;
+background black;
+position:absolute;
+top:60px;
+right:0:
+width:200px;
+display: none;
+}
+
+.nav-links.active{
+display: flex: 
+}
+
+about-container{
+ grid-template-columns: 1fr: 
+}
+
+project-container{
+ grid-template-columns:1fr:
+}
+
+}
+
+.whatsapp{
+position:fixed;
+bottom: 20px;
+right: 20px;
+background: #250366;
+color: white;
+font-size:24px;
+padding: 15px;
+border-radius: 50%;
+text-decoration: none;
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+z-index:1000;
 }
