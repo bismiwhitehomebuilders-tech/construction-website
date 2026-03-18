@@ -215,19 +215,25 @@ scroll-behavior:smooth;
 
 @media (max-width: 768px) {
 
+.menu-toggle{
+display:block;
+}
+
 .nav-links{
 flex-direction: column;
-background black;
+background:rgba(0,0,0,0.9);
 position:absolute;
 top:60px;
 right:0:
 width:200px;
 display: none;
+padding:20px;
 }
 
 .nav-links.active{
 display: flex: 
 }
+
 
 about-container{
  grid-template-columns: 1fr: 
@@ -260,4 +266,11 @@ justfy-content:center;
 .whatsapp:hover{
 trsnsform:scale(1.1);
 transition:0.3s;
+}
+
+.menu-toggle{
+display:none;
+font-size:24px;
+cursor:pointer;
+color:white;
 }

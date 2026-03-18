@@ -19,6 +19,8 @@
 
   <div class="logo">BISMI WHITE HOMEBUILDERS</div>
 
+  <div class="menu-toggle">&#8801;</div>
+
       <ul class="nav-links">
 
       <li><a href="#home">Home</a></li>
@@ -172,6 +174,17 @@ That is why we are committed to constructing strong, beautiful homes where famil
 <a href="https://wa.me/9072745989" class="whatsapp" target="_blank">
 <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="30">
 </a>
+
+<script>
+const toggle =
+document.queryselector(".menu-toggle");
+const nav =
+document.queryselector(".nav-links");
+
+toggle.addEvenyListener("click", () => {
+ nav.classlist.toggle("active");
+});
+</script>
 
 </body>
 
