@@ -274,7 +274,5 @@ transition: 0.3s;
 
 .menu-toggle{
 display: none;
-font-size: 24px;
-cursor: pointer;
-color: white;
 }
+
