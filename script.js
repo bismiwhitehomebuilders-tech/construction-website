@@ -1,7 +1,5 @@
-const toggle =
-document.queryselector(".menu-toggle");
-const nav =
-document.queryselector(".nav-links");
+const toggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector(".nav-links");
 
 toggle.addEventListener("click", function () {
 nav.classList.toggle("active");
