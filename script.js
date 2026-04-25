@@ -26,7 +26,11 @@ links.forEach(link => {
 // LOADER
 window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
-  if (loader) loader.style.display = "none";
+  if (loader) {
+    setTimeout(() => {
+      loader.style.display = "none";
+    }, 800);
+  }
 });
 
 // SCROLL ANIMATION
