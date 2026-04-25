@@ -13,11 +13,19 @@ const links = document.querySelectorAll('[data-page]');
 const pages = document.querySelectorAll('.page');
 
 links.forEach(link => {
-  link.addEventListener('click', () => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault(); // 🔥 important
+
     const id = link.getAttribute('data-page');
+    const target = document.getElementById(id);
+
+    if (!target) {
+      console.log("❌ Missing section:", id);
+      return; // stop crash
+    }
 
     pages.forEach(p => p.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+    target.classList.add('active');
 
     if (nav) nav.classList.remove("active");
   });
@@ -88,9 +96,9 @@ if (form) {
         body: JSON.stringify(data)
       });
 
-      const result = await res.json();
+const result = await res.text();
 
-      if (result.success) {
+if (result.includes("Saved"))
         alert("✅ Request Sent Successfully!");
 
         // WhatsApp redirect
