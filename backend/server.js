@@ -1,31 +1,32 @@
-import express from "express";
-import mongoose from "mongoose";
-import cors from "cors";
-import dotenv from "dotenv";
 import nodemailer from "nodemailer";
-
+import dotenv from "dotenv";
 dotenv.config();
+
+import express from "express";
+import cors from "cors";
+import { MongoClient } from "mongodb";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ✅ MongoDB connect
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB connected ✅"))
-  .catch(err => console.log(err));
+const client = new MongoClient(process.env.MONGO_URI);
 
-// ✅ Schema
-const ContactSchema = new mongoose.Schema({
-  name: String,
-  phone: String,
-  message: String,
-  createdAt: { type: Date, default: Date.now }
-});
+let db;
 
-const Contact = mongoose.model("Contact", ContactSchema);
+async function connectDB() {
+  try {
+    await client.connect();
+    db = client.db("mydb");
+    console.log("MongoDB connected ✅");
+  } catch (err) {
+    console.log(err);
+  }
+}
 
-// ✅ Email setup (use your real credentials later)
+connectDB();
+
+
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -34,46 +35,49 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// ✅ TEST ROUTE
+// TEST
 app.get("/", (req, res) => {
-  res.send("Backend is running 🚀");
+  res.send("Server + DB working á🚀");
 });
 
-// ✅ CONTACT ROUTE (FINAL CLEAN)
+// SAVE FORM
 app.post("/contact", async (req, res) => {
   try {
     const data = req.body;
 
-    // Save to DB
-    await Contact.create(data);
+    const result = await db.collection("contacts").insertOne(data);
 
-    // Send email
+    // 📧 SEND EMAIL
     await transporter.sendMail({
-      from: process.env.EMAIL,
-      to: process.env.EMAIL,
-      subject: "New Website Enquiry",
+      from: "bismiwhitehomebuilders@gmail.com",
+      to: "bismiwhitehomebuilders@gmail.com",
+      subject: "🚀 New Website Enquiry",
       text: `
+New enquiry received:
+
 Name: ${data.name}
 Phone: ${data.phone}
 Message: ${data.message}
       `
     });
 
-    // ✅ IMPORTANT: return JSON
     res.json({ success: true });
-
   } catch (err) {
     console.log(err);
-    res.status(500).json({ success: false });
+    res.status(500).json({ error: "Failed" });
+  }
+});
+// 👇 ADD THIS HERE
+app.get("/contacts", async (req, res) => {
+  try {
+    const data = await db.collection("contacts").find().toArray();
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch" });
   }
 });
 
-// ✅ GET LEADS
-app.get("/leads", async (req, res) => {
-  const data = await Contact.find().sort({ createdAt: -1 });
-  res.json(data);
+app.listen(3000, () => {
+  console.log("Server running on port 3000");
 });
 
-// ✅ PORT
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on ${PORT}`));
