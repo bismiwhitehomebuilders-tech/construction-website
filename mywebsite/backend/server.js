@@ -12,8 +12,8 @@ app.use(express.json());
 
 // ✅ MongoDB connect
 mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log("MongoDB connected ✅"))
-.catch(err => console.log(err));
+  .then(() => console.log("MongoDB connected ✅"))
+  .catch(err => console.log(err));
 
 // ✅ Schema
 const ContactSchema = new mongoose.Schema({
@@ -25,12 +25,12 @@ const ContactSchema = new mongoose.Schema({
 
 const Contact = mongoose.model("Contact", ContactSchema);
 
-// ✅ Email setup (Gmail)
+// ✅ Email setup (use your real credentials later)
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "yourgmail@gmail.com",      // change
-    pass: "your_app_password"         // change (NOT normal password)
+    user: process.env.EMAIL,
+    pass: process.env.EMAIL_PASS
   }
 });
 
@@ -39,37 +39,40 @@ app.get("/", (req, res) => {
   res.send("Backend is running 🚀");
 });
 
-// ✅ CONTACT ROUTE
+// ✅ CONTACT ROUTE (FINAL CLEAN)
 app.post("/contact", async (req, res) => {
   try {
-    // save to DB
-    await Contact.create(req.body);
+    const data = req.body;
 
-    // send email
+    // Save to DB
+    await Contact.create(data);
+
+    // Send email
     await transporter.sendMail({
-      from: "yourgmail@gmail.com",
-      to: "yourgmail@gmail.com",
-      subject: "New Contact Message",
-      text: JSON.stringify(req.body)
+      from: process.env.EMAIL,
+      to: process.env.EMAIL,
+      subject: "New Website Enquiry",
+      text: `
+Name: ${data.name}
+Phone: ${data.phone}
+Message: ${data.message}
+      `
     });
 
-    res.send("Saved + Email sent ✅");
+    // ✅ IMPORTANT: return JSON
+    res.json({ success: true });
+
   } catch (err) {
     console.log(err);
-    res.status(500).send("Error ❌");
+    res.status(500).json({ success: false });
   }
 });
 
-// ✅ GET ALL LEADS (ADMIN)
+// ✅ GET LEADS
 app.get("/leads", async (req, res) => {
-  try {
-    const data = await Contact.find().sort({ createdAt: -1 });
-    res.json(data);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to fetch leads" });
-  }
+  const data = await Contact.find().sort({ createdAt: -1 });
+  res.json(data);
 });
-
 
 // ✅ PORT
 const PORT = process.env.PORT || 3000;

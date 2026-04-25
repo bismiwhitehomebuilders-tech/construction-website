@@ -62,7 +62,7 @@ if (hero) {
   }, 4000);
 }
 
-// ✅ SINGLE FORM HANDLER (FINAL CLEAN)
+// ✅ FORM SUBMIT (FINAL CLEAN)
 const form = document.getElementById("contact-form");
 
 if (form) {
