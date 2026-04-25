@@ -24,7 +24,6 @@ const ContactSchema = new mongoose.Schema({
 });
 
 const Contact = mongoose.model("Contact", ContactSchema);
-const Contact = mongoose.model("Contact", ContactSchema);
 
 // ✅ Email setup (Gmail)
 const transporter = nodemailer.createTransport({
