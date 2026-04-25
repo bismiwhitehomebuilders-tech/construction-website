@@ -139,10 +139,6 @@ text-decoration: none;
   border-radius: 5px;
 }
 
-/* PAGE SWITCH */
-.page { display: none; }
-.page.active { display: block; }
-
 /* MOBILE */
 .menu-toggle { display: none; }
 

@@ -8,28 +8,6 @@ if (toggle && nav) {
   });
 }
 
-// PAGE SWITCH
-const links = document.querySelectorAll('[data-page]');
-const pages = document.querySelectorAll('.page');
-
-links.forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault(); // 🔥 important
-
-    const id = link.getAttribute('data-page');
-    const target = document.getElementById(id);
-
-    if (!target) {
-      console.log("❌ Missing section:", id);
-      return; // stop crash
-    }
-
-    pages.forEach(p => p.classList.remove('active'));
-    target.classList.add('active');
-
-    if (nav) nav.classList.remove("active");
-  });
-});
 
 // LOADER
 window.addEventListener("load", () => {
