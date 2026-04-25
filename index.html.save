@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>WHITE HOME BUILDERS</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+  <div class="logo">BISMI WHITE HOMEBUILDERS</div>
+
+      <ul class="nav-links">
+
+      <li><a href="#">Home</a></li>
+
+      <li><a href="#">Projects</a></li>
+
+      <li><a href="#">About</a></11>
+
+      <li><a href="#">Contact</a></li>
+
+   </ul>
+
+</nav>
+
+<section class="hero">
+
+ <div class="hero-conte1nt">
+
+    <h1>WHITE HOME BUILDERS</h1>
+
+    <p>Premium Construction & Renovation Services in Kochi</p>
+
+<a href="tel:9072745989"
+
+class="btn">CALL NOW</a>
+
+  </div>
+
+</section>
+
+
+<!-- HERE YOU ADD PROJECT SECTION -->
+section id="project" class="project">
+
+<h2>Our Project</h2>
+
+<div class="project-grid">
+
+<div class="project-card">
+<h3>Lixury villa</h3>
+<p>Modern villa construction in kochi.</p>
+<div>
+
+</div>
+
+</body>
+
+</html>
