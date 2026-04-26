@@ -466,16 +466,25 @@ html {
 
 .whatsapp-float {
   position: fixed;
-  bottom: 90px;   /* move above bottom bar */
+  bottom: 90px;
   right: 20px;
   z-index: 1000;
 
+  width: 55px;
+  height: 55px;
   background: #25D366;
-  color: white;
-  font-size: 22px;
-  padding: 15px;
-  border-radius: 50%;
-  text-decoration: none;
 
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+.whatsapp-float img {
+  width: 28px;
+  height: 28px;
+  object-fit: cover;
+  border-radius: 50%;
 }
