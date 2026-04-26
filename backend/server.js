@@ -1,32 +1,34 @@
-import nodemailer from "nodemailer";
-import dotenv from "dotenv";
-dotenv.config();
-
 import express from "express";
 import cors from "cors";
-import { MongoClient } from "mongodb";
+import dotenv from "dotenv";
+import nodemailer from "nodemailer";
+import { MongoClient, ObjectId } from "mongodb";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+
+dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const client = new MongoClient(process.env.MONGO_URI);
+// ===== ADMIN CONFIG =====
+const ADMIN_EMAIL = "admin@bismi.com";
+const ADMIN_PASS_HASH = bcrypt.hashSync("admin123", 8);
+const SECRET = "supersecretkey";
 
+// ===== DB =====
+const client = new MongoClient(process.env.MONGO_URI);
 let db;
 
 async function connectDB() {
-  try {
-    await client.connect();
-    db = client.db("mydb");
-    console.log("MongoDB connected ✅");
-  } catch (err) {
-    console.log(err);
-  }
+  await client.connect();
+  db = client.db("mydb");
+  console.log("MongoDB connected ✅");
 }
-
 connectDB();
 
-
+// ===== EMAIL =====
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -35,26 +37,42 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+// ===== TOKEN MIDDLEWARE =====
+function verifyToken(req, res, next) {
+  const token = req.headers["authorization"];
+  if (!token) return res.status(403).json({ error: "No token" });
+
+  try {
+    jwt.verify(token, SECRET);
+    next();
+  } catch {
+    res.status(401).json({ error: "Invalid token" });
+  }
+}
+
+// ===== ROUTES =====
+
 // TEST
 app.get("/", (req, res) => {
-  res.send("Server + DB working á🚀");
+  res.send("Server working 🚀");
 });
 
-// SAVE FORM
+// CONTACT FORM SAVE
 app.post("/contact", async (req, res) => {
   try {
     const data = req.body;
 
-    const result = await db.collection("contacts").insertOne(data);
+    await db.collection("contacts").insertOne({
+      ...data,
+      createdAt: new Date()
+    });
 
-    // 📧 SEND EMAIL
+    // EMAIL
     await transporter.sendMail({
-      from: "bismiwhitehomebuilders@gmail.com",
-      to: "bismiwhitehomebuilders@gmail.com",
-      subject: "🚀 New Website Enquiry",
+      from: process.env.EMAIL,
+      to: process.env.EMAIL,
+      subject: "New Enquiry",
       text: `
-New enquiry received:
-
 Name: ${data.name}
 Phone: ${data.phone}
 Message: ${data.message}
@@ -62,31 +80,63 @@ Message: ${data.message}
     });
 
     res.json({ success: true });
+
   } catch (err) {
     console.log(err);
+    res.status(500).json({ success: false });
+  }
+});
+
+// GET LEADS (PROTECTED)
+app.get("/leads", verifyToken, async (req, res) => {
+  try {
+    const leads = await db
+      .collection("contacts")
+      .find()
+      .sort({ createdAt: -1 })
+      .toArray();
+
+    res.json(leads);
+  } catch {
     res.status(500).json({ error: "Failed" });
   }
 });
-// 👇 ADD THIS HERE
-app.get("/contacts", async (req, res) => {
-  try {
-    const data = await db.collection("contacts").find().toArray();
-    res.json(data);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to fetch" });
-  }
-});
-
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
-});
 
 // DELETE LEAD
-app.delete("/delete/:id", async (req, res) => {
+app.delete("/delete/:id", verifyToken, async (req, res) => {
   try {
-    await Contact.findByIdAndDelete(req.params.id);
+    await db.collection("contacts").deleteOne({
+      _id: new ObjectId(req.params.id)
+    });
+
     res.json({ success: true });
-  } catch (err) {
+  } catch {
     res.status(500).json({ success: false });
   }
+});
+
+// ADMIN LOGIN
+app.post("/admin-login", (req, res) => {
+  const { email, password } = req.body;
+
+  if (email !== ADMIN_EMAIL) {
+    return res.status(401).json({ error: "Invalid" });
+  }
+
+  const valid = bcrypt.compareSync(password, ADMIN_PASS_HASH);
+
+  if (!valid) {
+    return res.status(401).json({ error: "Invalid" });
+  }
+
+  const token = jwt.sign({ role: "admin" }, SECRET, {
+    expiresIn: "2h"
+  });
+
+  res.json({ token });
+});
+
+// START
+app.listen(3000, () => {
+  console.log("Server running on port 3000");
 });

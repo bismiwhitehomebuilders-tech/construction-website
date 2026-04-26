@@ -75,11 +75,23 @@ if (form) {
         body: JSON.stringify(data)
       });
 
-const result = await res.text();
+const result = await res.json();
 
-if (result.includes("Saved"))
-        alert("✅ Request Sent Successfully!");
+if (result.success) {
+  alert("✅ Request Sent Successfully!");
 
+  const phoneNumber = "919072745989";
+  const msg = `New enquiry:
+Name: ${data.name}
+Phone: ${data.phone}
+Message: ${data.message}`;
+
+  window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(msg)}`, "_blank");
+
+  form.reset();
+} else {
+  alert("❌ Failed to send");
+}
         // WhatsApp redirect
         const phoneNumber = "919072745989";
         const msg = `New enquiry:
@@ -98,5 +110,57 @@ Message: ${data.message}`;
       console.log(err);
       alert("⚠️ Server error");
     }
+  });
+}
+
+const API = "https://construction-website-ey39.onrender.com";
+
+async function login() {
+  const email = "admin@bismi.com";
+  const password = document.getElementById("password").value;
+
+  const res = await fetch(API + "/admin-login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ email, password })
+  });
+
+  const data = await res.json();
+
+  if (data.token) {
+    localStorage.setItem("token", data.token);
+
+    document.getElementById("login").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
+
+    loadLeads();
+  } else {
+    alert("Wrong password");
+  }
+}
+
+async function loadLeads() {
+  const token = localStorage.getItem("token");
+
+  const res = await fetch(API + "/leads", {
+    headers: {
+      "Authorization": token
+    }
+  });
+
+  const data = await res.json();
+
+  const container = document.getElementById("leads");
+  container.innerHTML = "";
+
+  data.forEach(l => {
+    container.innerHTML += `
+      <div>
+        <b>${l.name}</b> (${l.phone})<br/>
+        ${l.message}
+      </div>
+    `;
   });
 }
