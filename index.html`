@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="builders in Kochi, home construction Kochi, villa builders Kerala, contractors Kochi">
+<title>Builders in Kochi | Bismi White Home Builders</title>
+
+<meta name="description" content="Top builders in Kochi with 30+ years experience. We build luxury homes, villas & commercial buildings with quality and trust. Call now for free consultation.">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<!-- loader-text -->
+<div id="loader">
+  <div class="loader-text">BISMI BUILDERS</div>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">BISMI WHITE HOMEBUILDERS</div>
+ <div class="menu-toggle">☰</div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HOME -->
+<section id="home">
+  <div class="hero">
+<p style="letter-spacing:2px; color:#d4af37;">BUILDING EXCELLENCE 30+ YEARS TRUST</p>
+    <h1>BISMI WHITE HOME BUILDERS</h1>
+<p>
+    We design and build luxury homes, villas, and commercial buildings 
+    with guaranteed quality, on-time delivery, and transparent pricing.
+  </p>
+
+  <a href="tel:9072745989" class="btn">📞 Call Now</a>
+  <a href="https://wa.me/919072745989" class="btn">💬 WhatsApp Now</a>
+</div>
+</section>
+
+<section class="highlight">
+  <h2>Why Families Choose Us</h2>
+  <p>
+    ✔ 30+ Years Experience  
+    ✔ 100+ Completed Projects  
+    ✔ No Compromise in Quality  
+    ✔ Transparent Pricing  
+    ✔ On-Time Delivery Guarantee  
+  </p>
+</section>
+
+<section class="cta">
+  <h2>Planning to Build a House?</h2>
+  <p>Get a FREE consultation today. Limited slots available.</p>
+  
+  <a href="tel:9072745989" class="btn">📞 Call Now</a>
+  <a href="https://wa.me/919072745989" class="btn">💬 WhatsApp</a>
+</section>
+
+<section class="services">
+  <h2>Our Services</h2>
+  <div class="service-grid">
+    <div>🏠 Home Construction</div>
+    <div>🏢 Commercial Buildings</div>
+    <div>🔨 Renovation</div>
+    <div>🎨 Interior Design</div>
+  </div>
+</section>
+
+<section class="trust">
+  <h2>Why Choose Us</h2>
+  <div class="trust-grid">
+    <div>✔ 30+ Years Experience</div>
+    <div>✔ 100+ Projects Completed</div>
+    <div>✔ Quality Guarantee</div>
+    <div>✔ On-Time Delivery</div>
+  </div>
+</section>
+
+<section class="stats">
+  <div>🏗 100+ Projects Completed</div>
+  <div>📍 Serving Kochi & Kerala</div>
+  <div>⭐ Trusted by Families</div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <h2>Our Projects</h2>
+<h2>Our Recent Works</h2>
+<p>Real homes built for real families in Kochi & Kerala</p>
+  <div class="project-grid">
+    <div class="project-card">
+      <img src="images/villa.jpg">
+      <h3>Luxury Villa</h3>
+<p>Modern villa construction in Kochi with premium finishing.</p>
+    </div>
+
+    <div class="project-card">
+      <img src="images/home.jpg">
+      <h3>Modern Home</h3>
+    </div>
+
+    <div class="project-card">
+      <img src="images/commercial.jpg">
+      <h3>Commercial</h3>
+    </div>
+
+<div class="project-card">
+  <img src="images/ours1.jpg">
+  <h3>From concept to completion—another one in the books</h3>
+</div>
+
+<div class="project-card">
+  <img src="images/ours2.jpg">
+  <h3>Built right. Looks even better</h3>
+</div>
+
+<div class="project-card">
+      <img src="images/ours3.jpg">
+      <h3>"It started with a handshake. It ends with a landmark</h3>
+    </div>
+  
+<div class="project-card">
+      <img src="images/ours4.jpg">
+      <h3>Where designs meet reality</h3>
+    </div>
+<a href="tel:9072745989" class="btn">Get Free Consultation</a>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <h2>About Us</h2>
+  <p>30+ years experience in construction excellence.</p>
+</section>
+<a href="tel:9072745989" class="btn">Get Free Consultation</a>
+
+<!-- cta -->
+<section class="cta">
+  <h2>Build Your Dream Home Today</h2>
+  <p>Contact us for a free consultation and start your project with trusted builders in Kochi.</p>
+  <a href="tel:9072745989" class="btn">Call Now</a>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <h2>Get Free Consultation</h2>
+  <p>Tell us your plan. We’ll guide you step by step.</p>
+
+  <form id="contact-form" class="contact-form">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="tel" name="phone" placeholder="Phone Number" required>
+    <textarea name="message" placeholder="Your project details"></textarea>
+    <button type="submit">Send Request</button>
+  </form>
+
+  <p style="margin-top:15px;">
+    Or contact directly:
+  </p>
+
+  <a href="tel:9072745989" class="btn">📞 Call Now</a>
+  <a href="https://wa.me/919072745989" class="btn">💬 WhatsApp</a>
+</section>
+
+<script src="script.js"></script>
+
+<div id="admin-data"></div>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/919072745989?text=Hi%20I%20need%20construction%20details%20for%20my%20home"
+   class="whatsapp-float"
+   target="_blank">
+  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+</a>
+
+<div class="whatsapp-box">
+  <span>Chat with us</span>
+  <a href="https://wa.me/919072745989?text=Hi%20I%20need%20construction%20details%20for%20my%20home"
+     class="whatsapp-float"
+     target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+  </a>
+</div>
+
+<!-- BOTTOM BAR -->
+<div class="call-bar">
+  <a href="tel:9072745989">📞 Call Now</a>
+  <a href="https://wa.me/919072745989">💬 WhatsApp</a>
+</div>
+
+</body>
+</html>
+
+</body>
+</html>
