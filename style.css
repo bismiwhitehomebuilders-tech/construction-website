@@ -463,3 +463,19 @@ html {
 .call-bar a:last-child {
   background: #25D366;
 }
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 90px;   /* move above bottom bar */
+  right: 20px;
+  z-index: 1000;
+
+  background: #25D366;
+  color: white;
+  font-size: 22px;
+  padding: 15px;
+  border-radius: 50%;
+  text-decoration: none;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
