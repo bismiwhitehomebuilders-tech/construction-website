@@ -187,9 +187,12 @@ text-decoration: none;
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: green;
-  padding: 10px;
+  background: #25D366;
+  color: white;
+  padding: 15px;
   border-radius: 50%;
+  font-size: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 /* SCROLL ANIMATION */
@@ -434,4 +437,29 @@ html {
 
 .contact-form button:hover {
   transform: scale(1.05);
+}
+
+.call-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  z-index: 1000;
+}
+
+.call-bar a {
+  flex: 1;
+  text-align: center;
+  padding: 15px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.call-bar a:first-child {
+  background: #d4af37;
+}
+
+.call-bar a:last-child {
+  background: #25D366;
 }

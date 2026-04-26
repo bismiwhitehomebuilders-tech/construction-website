@@ -33,6 +33,7 @@ document.querySelectorAll("section, .project-card").forEach(el => {
   observer.observe(el);
 });
 
+
 // HERO IMAGE SLIDER
 const hero = document.querySelector(".hero");
 
