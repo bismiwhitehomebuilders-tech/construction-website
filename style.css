@@ -470,8 +470,8 @@ html {
   right: 20px;
   z-index: 1000;
 
-  width: 55px;
-  height: 55px;
+  width: 60px;
+  height: 60px;
   background: #25D366;
 
   display: flex;
@@ -480,11 +480,25 @@ html {
 
   border-radius: 50%;
   box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+
+  animation: pulse 2s infinite;
 }
 
+/* ICON */
 .whatsapp-float img {
-  width: 28px;
-  height: 28px;
-  object-fit: cover;
-  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+
+/* PULSE ANIMATION */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
 }
