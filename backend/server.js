@@ -81,3 +81,12 @@ app.listen(3000, () => {
   console.log("Server running on port 3000");
 });
 
+// DELETE LEAD
+app.delete("/delete/:id", async (req, res) => {
+  try {
+    await Contact.findByIdAndDelete(req.params.id);
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ success: false });
+  }
+});

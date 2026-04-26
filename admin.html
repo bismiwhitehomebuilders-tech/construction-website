@@ -9,39 +9,90 @@
       color: white;
       padding: 20px;
     }
+
+    h1 {
+      color: #d4af37;
+    }
+
     .card {
       background: #222;
       padding: 15px;
       margin: 10px 0;
       border-radius: 10px;
     }
+
+    button {
+      background: red;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      cursor: pointer;
+    }
+
+    input {
+      padding: 10px;
+      width: 100%;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
 
-<h1>📊 Leads</h1>
-<div id="leads"></div>
+<h1>🔐 Admin Login</h1>
+
+<div id="login">
+  <input type="password" id="password" placeholder="Enter password">
+  <button onclick="login()">Login</button>
+</div>
+
+<div id="dashboard" style="display:none;">
+  <h1>📊 Leads Dashboard</h1>
+  <div id="data"></div>
+</div>
 
 <script>
+const API = "https://construction-website-ey39.onrender.com";
+
+// 🔐 SIMPLE LOGIN
+function login() {
+  const pass = document.getElementById("password").value;
+
+  if (pass === "admin123") {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
+    loadLeads();
+  } else {
+    alert("Wrong password");
+  }
+}
+
+// 📥 LOAD LEADS
 async function loadLeads() {
-  const res = await fetch("https://construction-website-ey39.onrender.com/leads");
+  const res = await fetch(API + "/leads");
   const data = await res.json();
 
-  const container = document.getElementById("leads");
+  const container = document.getElementById("data");
+  container.innerHTML = "";
 
-  data.forEach(lead => {
-    const div = document.createElement("div");
-    div.className = "card";
-    div.innerHTML = `
-      <h3>${lead.name}</h3>
-      <p>📞 ${lead.phone}</p>
-      <p>${lead.message}</p>
+  data.forEach(item => {
+    container.innerHTML += `
+      <div class="card">
+        <p><b>Name:</b> ${item.name}</p>
+        <p><b>Phone:</b> ${item.phone}</p>
+        <p><b>Message:</b> ${item.message}</p>
+        <button onclick="deleteLead('${item._id}')">Delete</button>
+      </div>
     `;
-    container.appendChild(div);
   });
 }
 
-loadLeads();
+// 🗑 DELETE
+async function deleteLead(id) {
+  await fetch(API + "/delete/" + id, {
+    method: "DELETE"
+  });
+  loadLeads();
+}
 </script>
 
 </body>
